@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace ISTPLab;
+namespace ISTPLab.Models;
 
 public partial class TimeTableContext : DbContext
 {

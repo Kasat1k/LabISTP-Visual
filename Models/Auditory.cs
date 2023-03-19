@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace ISTPLab;
+namespace ISTPLab.Models;
 
 public partial class Auditory
 {
     public int Id { get; set; }
+    
 
     public int Floor { get; set; }
 

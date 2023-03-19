@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ISTPLab;
+namespace ISTPLab.Models;
 
 public partial class Student
 {
