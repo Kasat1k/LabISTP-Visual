@@ -21,17 +21,19 @@ namespace ISTPLab.Controllers
         // GET: Teachers
         public async Task<IActionResult> Index(int? id, string? name)
         {
-            if ( id == null) return RedirectToAction("Faculties", "Index");
-            ViewBag.Faculty = id;
+            if (id == null) return RedirectToAction("Faculties", "Index");
+            ViewBag.FacultyId = id;
             ViewBag.FacultyName = name;
-            var teachersByFaculty = _context.Teachers.Where( t => t.Faculty == id).Include(t => t.Faculty);
+            var teachersByFaculty = _context.Teachers.Where(t => t.Faculty == id).Include(t => t.FacultyNavigation);
 
             return View(await teachersByFaculty.ToListAsync());
-            
+        }
+       /* public async Task<IActionResult> Index()
+        {
             var timeTableContext = _context.Teachers.Include(t => t.FacultyNavigation);
             return View(await timeTableContext.ToListAsync());
         }
-
+       */
         // GET: Teachers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -126,7 +128,6 @@ namespace ISTPLab.Controllers
             }
             ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name", teacher.Faculty);
             return View(teacher);
-            
         }
 
         // GET: Teachers/Delete/5
@@ -171,7 +172,5 @@ namespace ISTPLab.Controllers
         {
           return (_context.Teachers?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-        
-
     }
 }
