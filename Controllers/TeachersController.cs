@@ -54,8 +54,10 @@ namespace ISTPLab.Controllers
         }
 
         // GET: Teachers/Create
-        public IActionResult Create()
+        public IActionResult Create(int facultyId)
         {
+            ViewBag.FacultyId = facultyId;
+            ViewBag.FacultyName = _context.Faculties.Where(f => f.Id == facultyId).FirstOrDefault().Name;
             ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name");
             return View();
         }
@@ -65,16 +67,20 @@ namespace ISTPLab.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Faculty")] Teacher teacher)
+        public async Task<IActionResult> Create(int facultyId,[Bind("Id,Name,Faculty")] Teacher teacher)
         {
+             teacher.Faculty = facultyId;
             if (ModelState.IsValid)
             {
                 _context.Add(teacher);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+               return RedirectToAction("Index", "Teachers", new { id = facultyId, name = _context.Faculties.Where(f => f.Id == facultyId).FirstOrDefault().Name });
+            
             }
-            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name", teacher.Faculty);
-            return View(teacher);
+            //ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name", teacher.Faculty);
+             //return View(teacher);
+            return RedirectToAction("Index", "Teachers", new { id = facultyId, name = _context.Faculties.Where(f => f.Id == facultyId).FirstOrDefault().Name });
         }
 
         // GET: Teachers/Edit/5

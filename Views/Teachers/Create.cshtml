@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Додавання викладача до факультету @ViewBag.FacultyName</h1>
 
 <h4>Teacher</h4>
 <hr />
@@ -19,8 +19,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Faculty" class="control-label"></label>
-                <select asp-for="Faculty" class ="form-control" asp-items="ViewBag.Faculty"></select>
+             <select asp-for="Faculty" class ="form-control" asp-items="ViewBag.Faculty"></select>
+              
+                <span asp-validation-for="Faculty" class="text-danger"></span>
+                
             </div>
+            <inpute type="hidden" value="@ViewBag.FacultyId" name="FacultyId" />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
