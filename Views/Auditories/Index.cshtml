@@ -1,19 +1,22 @@
-﻿@model IEnumerable<ISTPLab.Models.Teacher>
+﻿@model IEnumerable<ISTPLab.Models.Auditory>
 
 @{
-    ViewData["Title"] = "Викладачі за факультетом";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Викладачі за факультетом @ViewBag.FacultyName</h1>
+<h1>Index</h1>
 
 <p>
-    @Html.ActionLink("Додати нового викладача","Create", new { facultyId = @ViewBag.FacultyId})
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Floor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FacultyNavigation)
@@ -25,9 +28,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Floor)
             </td>
-                
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FacultyNavigation.Name)
             </td>
@@ -35,7 +40,6 @@
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    
             </td>
         </tr>
 }

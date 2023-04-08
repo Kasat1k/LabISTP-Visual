@@ -9,89 +9,90 @@ using ISTPLab.Models;
 
 namespace ISTPLab.Controllers
 {
-    public class FacultiesController : Controller
+    public class AuditoriesController : Controller
     {
         private readonly TimeTableContext _context;
 
-        public FacultiesController(TimeTableContext context)
+        public AuditoriesController(TimeTableContext context)
         {
             _context = context;
         }
 
-        // GET: Faculties
+        // GET: Auditories
         public async Task<IActionResult> Index()
         {
-              return _context.Faculties != null ? 
-                          View(await _context.Faculties.ToListAsync()) :
-                          Problem("Entity set 'TimeTableContext.Faculties'  is null.");
+            var timeTableContext = _context.Auditories.Include(a => a.FacultyNavigation);
+            return View(await timeTableContext.ToListAsync());
         }
 
-        // GET: Faculties/Details/5
+        // GET: Auditories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Faculties == null)
+            if (id == null || _context.Auditories == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties
+            var auditory = await _context.Auditories
+                .Include(a => a.FacultyNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (faculty == null)
+            if (auditory == null)
             {
                 return NotFound();
             }
 
-            // return View(faculty);
-            // return View(Faculty)
-            return RedirectToAction("Index", "Teachers", new { id = faculty.Id, name = faculty.Name });
+            return View(auditory);
         }
 
-        // GET: Faculties/Create
+        // GET: Auditories/Create
         public IActionResult Create()
         {
+            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name");
             return View();
         }
 
-        // POST: Faculties/Create
+        // POST: Auditories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Faculty faculty)
+        public async Task<IActionResult> Create([Bind("Id,Floor,Number,Faculty")] Auditory auditory)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(faculty);
+                _context.Add(auditory);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(faculty);
+            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name", auditory.Faculty);
+            return View(auditory);
         }
 
-        // GET: Faculties/Edit/5
+        // GET: Auditories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Faculties == null)
+            if (id == null || _context.Auditories == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties.FindAsync(id);
-            if (faculty == null)
+            var auditory = await _context.Auditories.FindAsync(id);
+            if (auditory == null)
             {
                 return NotFound();
             }
-            return View(faculty);
+            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name", auditory.Faculty);
+            return View(auditory);
         }
 
-        // POST: Faculties/Edit/5
+        // POST: Auditories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Faculty faculty)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Floor,Number,Faculty")] Auditory auditory)
         {
-            if (id != faculty.Id)
+            if (id != auditory.Id)
             {
                 return NotFound();
             }
@@ -100,12 +101,12 @@ namespace ISTPLab.Controllers
             {
                 try
                 {
-                    _context.Update(faculty);
+                    _context.Update(auditory);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FacultyExists(faculty.Id))
+                    if (!AuditoryExists(auditory.Id))
                     {
                         return NotFound();
                     }
@@ -116,50 +117,51 @@ namespace ISTPLab.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(faculty);
+            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name", auditory.Faculty);
+            return View(auditory);
         }
 
-        // GET: Faculties/Delete/5
+        // GET: Auditories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Faculties == null)
+            if (id == null || _context.Auditories == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties
+            var auditory = await _context.Auditories
+                .Include(a => a.FacultyNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (faculty == null)
+            if (auditory == null)
             {
                 return NotFound();
             }
 
-            return View(faculty);
-            
+            return View(auditory);
         }
 
-        // POST: Faculties/Delete/5
+        // POST: Auditories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Faculties == null)
+            if (_context.Auditories == null)
             {
-                return Problem("Entity set 'TimeTableContext.Faculties'  is null.");
+                return Problem("Entity set 'TimeTableContext.Auditories'  is null.");
             }
-            var faculty = await _context.Faculties.FindAsync(id);
-            if (faculty != null)
+            var auditory = await _context.Auditories.FindAsync(id);
+            if (auditory != null)
             {
-                _context.Faculties.Remove(faculty);
+                _context.Auditories.Remove(auditory);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FacultyExists(int id)
+        private bool AuditoryExists(int id)
         {
-          return (_context.Faculties?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Auditories?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

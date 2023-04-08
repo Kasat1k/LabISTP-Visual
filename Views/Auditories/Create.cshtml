@@ -1,30 +1,31 @@
-﻿@model ISTPLab.Models.Teacher
+﻿@model ISTPLab.Models.Auditory
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Додавання викладача до факультету @ViewBag.FacultyName</h1>
+<h1>Create</h1>
 
-<h4>Teacher</h4>
+<h4>Auditory</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Floor" class="control-label"></label>
+                <input asp-for="Floor" class="form-control" />
+                <span asp-validation-for="Floor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Number" class="control-label"></label>
+                <input asp-for="Number" class="form-control" />
+                <span asp-validation-for="Number" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Faculty" class="control-label"></label>
-             <select asp-for="Faculty" class ="form-control" asp-items="ViewBag.Faculty"></select>
-              
-                <span asp-validation-for="Faculty" class="text-danger"></span>
-                
+                <select asp-for="Faculty" class ="form-control" asp-items="ViewBag.Faculty"></select>
             </div>
-            <inpute type="hidden" value="@ViewBag.FacultyId" name="FacultyId" />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

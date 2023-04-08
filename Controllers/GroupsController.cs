@@ -9,89 +9,90 @@ using ISTPLab.Models;
 
 namespace ISTPLab.Controllers
 {
-    public class FacultiesController : Controller
+    public class GroupsController : Controller
     {
         private readonly TimeTableContext _context;
 
-        public FacultiesController(TimeTableContext context)
+        public GroupsController(TimeTableContext context)
         {
             _context = context;
         }
 
-        // GET: Faculties
+        // GET: Groups
         public async Task<IActionResult> Index()
         {
-              return _context.Faculties != null ? 
-                          View(await _context.Faculties.ToListAsync()) :
-                          Problem("Entity set 'TimeTableContext.Faculties'  is null.");
+            var timeTableContext = _context.Groups.Include(@g => @g.FacultyNavigation);
+            return View(await timeTableContext.ToListAsync());
         }
 
-        // GET: Faculties/Details/5
+        // GET: Groups/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Faculties == null)
+            if (id == null || _context.Groups == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties
+            var @group = await _context.Groups
+                .Include(@g => @g.FacultyNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (faculty == null)
+            if (@group == null)
             {
                 return NotFound();
             }
 
-            // return View(faculty);
-            // return View(Faculty)
-            return RedirectToAction("Index", "Teachers", new { id = faculty.Id, name = faculty.Name });
+            return View(@group);
         }
 
-        // GET: Faculties/Create
+        // GET: Groups/Create
         public IActionResult Create()
         {
+            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name");
             return View();
         }
 
-        // POST: Faculties/Create
+        // POST: Groups/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Faculty faculty)
+        public async Task<IActionResult> Create([Bind("Id,Name,Faculty")] Group @group)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(faculty);
+                _context.Add(@group);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(faculty);
+            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name", @group.Faculty);
+            return View(@group);
         }
 
-        // GET: Faculties/Edit/5
+        // GET: Groups/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Faculties == null)
+            if (id == null || _context.Groups == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties.FindAsync(id);
-            if (faculty == null)
+            var @group = await _context.Groups.FindAsync(id);
+            if (@group == null)
             {
                 return NotFound();
             }
-            return View(faculty);
+            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name", @group.Faculty);
+            return View(@group);
         }
 
-        // POST: Faculties/Edit/5
+        // POST: Groups/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Faculty faculty)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Faculty")] Group @group)
         {
-            if (id != faculty.Id)
+            if (id != @group.Id)
             {
                 return NotFound();
             }
@@ -100,12 +101,12 @@ namespace ISTPLab.Controllers
             {
                 try
                 {
-                    _context.Update(faculty);
+                    _context.Update(@group);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FacultyExists(faculty.Id))
+                    if (!GroupExists(@group.Id))
                     {
                         return NotFound();
                     }
@@ -116,50 +117,51 @@ namespace ISTPLab.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(faculty);
+            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name", @group.Faculty);
+            return View(@group);
         }
 
-        // GET: Faculties/Delete/5
+        // GET: Groups/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Faculties == null)
+            if (id == null || _context.Groups == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties
+            var @group = await _context.Groups
+                .Include(@g => @g.FacultyNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (faculty == null)
+            if (@group == null)
             {
                 return NotFound();
             }
 
-            return View(faculty);
-            
+            return View(@group);
         }
 
-        // POST: Faculties/Delete/5
+        // POST: Groups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Faculties == null)
+            if (_context.Groups == null)
             {
-                return Problem("Entity set 'TimeTableContext.Faculties'  is null.");
+                return Problem("Entity set 'TimeTableContext.Groups'  is null.");
             }
-            var faculty = await _context.Faculties.FindAsync(id);
-            if (faculty != null)
+            var @group = await _context.Groups.FindAsync(id);
+            if (@group != null)
             {
-                _context.Faculties.Remove(faculty);
+                _context.Groups.Remove(@group);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FacultyExists(int id)
+        private bool GroupExists(int id)
         {
-          return (_context.Faculties?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Groups?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
