@@ -1,0 +1,24 @@
+﻿@model ISTPLab.Models.Timetable
+
+@{
+    ViewData["Title"] = "GroupChoose " ;
+}
+
+<h1>Вибір групи</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Timetables">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="GroupTt"  class="control-label"></label>
+                <select asp-for="GroupTt" class="form-control" asp-items="ViewBag.GroupCh"></select>
+                <input type="submit" value="Розклад для данної групи" class="btn btn-primary" />
+            </div>
+ 
+        </form>
+    </div>
+</div>
+

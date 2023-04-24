@@ -1,0 +1,50 @@
+﻿
+@model IEnumerable<ISTPLab.Models.Timetable>
+
+@{
+    ViewData["Title"] = "Заплановані пари";
+}
+
+<h1>Заплановані пари для обраної групи</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+                @Html.DisplayNameFor(model => model.AuditoryNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupTtNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeacherNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuditoryNavigation.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupTtNavigation.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectNavigation.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeacherNavigation.Name)
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

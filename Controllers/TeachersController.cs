@@ -19,21 +19,20 @@ namespace ISTPLab.Controllers
         }
 
         // GET: Teachers
-        public async Task<IActionResult> Index(int? id, string? name)
-        {
-            if (id == null) return RedirectToAction("Faculties", "Index");
-            ViewBag.FacultyId = id;
-            ViewBag.FacultyName = name;
-            var teachersByFaculty = _context.Teachers.Where(t => t.Faculty == id).Include(t => t.FacultyNavigation);
-
-            return View(await teachersByFaculty.ToListAsync());
-        }
-       /* public async Task<IActionResult> Index()
+      /*  public async Task<IActionResult> Index()
         {
             var timeTableContext = _context.Teachers.Include(t => t.FacultyNavigation);
             return View(await timeTableContext.ToListAsync());
+        }*/
+        public async Task<IActionResult> Index(int? id, string? name)
+        {
+            if (id == null) return RedirectToAction("Faculties","Index");
+            ViewBag.FacultyId = id;
+            ViewBag.FacultyName = name;
+            var teachersByFaculty = _context.Teachers.Where(t => t.Faculty == id).Include(t => t.FacultyNavigation);
+            return View(await teachersByFaculty.ToListAsync());
         }
-       */
+
         // GET: Teachers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -53,12 +52,17 @@ namespace ISTPLab.Controllers
             return View(teacher);
         }
 
-        // GET: Teachers/Create
-        public IActionResult Create(int facultyId)
+        public TimeTableContext Get_context()
         {
-            ViewBag.FacultyId = facultyId;
-            ViewBag.FacultyName = _context.Faculties.Where(f => f.Id == facultyId).FirstOrDefault().Name;
-            ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name");
+            return _context;
+        }
+
+        // GET: Teachers/Create
+        public IActionResult Create(int? facultyId)
+        {
+            //ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name");
+            ViewBag.FacultyId=facultyId;
+            ViewBag.FacultyName= _context.Faculties.Where(f=>f.Id == facultyId).FirstOrDefault().Name;
             return View();
         }
 
@@ -69,17 +73,16 @@ namespace ISTPLab.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int facultyId,[Bind("Id,Name,Faculty")] Teacher teacher)
         {
-             teacher.Faculty = facultyId;
+            teacher.Faculty = facultyId;
             if (ModelState.IsValid)
             {
                 _context.Add(teacher);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
-               return RedirectToAction("Index", "Teachers", new { id = facultyId, name = _context.Faculties.Where(f => f.Id == facultyId).FirstOrDefault().Name });
-            
+                return RedirectToAction("Index","Teachers", new {id=facultyId, name=_context.Faculties.Where(f => f.Id == facultyId).FirstOrDefault().Name });
             }
             //ViewData["Faculty"] = new SelectList(_context.Faculties, "Id", "Name", teacher.Faculty);
-             //return View(teacher);
+            //return View(teacher);
             return RedirectToAction("Index", "Teachers", new { id = facultyId, name = _context.Faculties.Where(f => f.Id == facultyId).FirstOrDefault().Name });
         }
 

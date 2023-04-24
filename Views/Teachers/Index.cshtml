@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ISTPLab.Models.Teacher>
 
 @{
-    ViewData["Title"] = "Викладачі за факультетом";
+    ViewData["Title"] = "Викладачі за факультетом ";
 }
 
 <h1>Викладачі за факультетом @ViewBag.FacultyName</h1>
 
 <p>
-    @Html.ActionLink("Додати нового викладача","Create", new { facultyId = @ViewBag.FacultyId})
+    @Html.ActionLink("add new","Create", new{facultyId = @ViewBag.FacultyId})
 </p>
 <table class="table">
     <thead>
@@ -27,7 +27,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-                
             <td>
                 @Html.DisplayFor(modelItem => item.FacultyNavigation.Name)
             </td>
@@ -35,7 +34,6 @@
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    
             </td>
         </tr>
 }

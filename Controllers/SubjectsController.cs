@@ -5,93 +5,92 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ISTPLab;
 using ISTPLab.Models;
 
 namespace ISTPLab.Controllers
 {
-    public class FacultiesController : Controller
+    public class SubjectsController : Controller
     {
         private readonly TimeTableContext _context;
 
-        public FacultiesController(TimeTableContext context)
+        public SubjectsController(TimeTableContext context)
         {
             _context = context;
         }
 
-        // GET: Faculties
+        // GET: Subjects
         public async Task<IActionResult> Index()
         {
-            //return _context.Faculties != null ? 
-            return View(await _context.Faculties.ToListAsync());
-                        //  Problem("Entity set 'TimeTableContext.Faculties'  is null.");
+              return _context.Subjects != null ? 
+                          View(await _context.Subjects.ToListAsync()) :
+                          Problem("Entity set 'TimeTableContext.Subjects'  is null.");
         }
 
-        // GET: Faculties/Details/5
+        // GET: Subjects/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Faculties == null)
+            if (id == null || _context.Subjects == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties
+            var subject = await _context.Subjects
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (faculty == null)
+            if (subject == null)
             {
                 return NotFound();
             }
 
-            // return View(faculty);
-            // return View(Faculty)
-            return RedirectToAction("Index", "Teachers", new { id = faculty.Id, name = faculty.Name });
+            return View(subject);
         }
 
-        // GET: Faculties/Create
+        // GET: Subjects/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Faculties/Create
+        // POST: Subjects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Faculty faculty)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Subject subject)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(faculty);
+                _context.Add(subject);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(faculty);
+            return View(subject);
         }
 
-        // GET: Faculties/Edit/5
+        // GET: Subjects/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Faculties == null)
+            if (id == null || _context.Subjects == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties.FindAsync(id);
-            if (faculty == null)
+            var subject = await _context.Subjects.FindAsync(id);
+            if (subject == null)
             {
                 return NotFound();
             }
-            return View(faculty);
+            return View(subject);
         }
 
-        // POST: Faculties/Edit/5
+        // POST: Subjects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Faculty faculty)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Subject subject)
         {
-            if (id != faculty.Id)
+            if (id != subject.Id)
             {
                 return NotFound();
             }
@@ -100,12 +99,12 @@ namespace ISTPLab.Controllers
             {
                 try
                 {
-                    _context.Update(faculty);
+                    _context.Update(subject);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FacultyExists(faculty.Id))
+                    if (!SubjectExists(subject.Id))
                     {
                         return NotFound();
                     }
@@ -116,50 +115,49 @@ namespace ISTPLab.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(faculty);
+            return View(subject);
         }
 
-        // GET: Faculties/Delete/5
+        // GET: Subjects/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Faculties == null)
+            if (id == null || _context.Subjects == null)
             {
                 return NotFound();
             }
 
-            var faculty = await _context.Faculties
+            var subject = await _context.Subjects
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (faculty == null)
+            if (subject == null)
             {
                 return NotFound();
             }
 
-            return View(faculty);
-            
+            return View(subject);
         }
 
-        // POST: Faculties/Delete/5
+        // POST: Subjects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Faculties == null)
+            if (_context.Subjects == null)
             {
-                return Problem("Entity set 'TimeTableContext.Faculties'  is null.");
+                return Problem("Entity set 'TimeTableContext.Subjects'  is null.");
             }
-            var faculty = await _context.Faculties.FindAsync(id);
-            if (faculty != null)
+            var subject = await _context.Subjects.FindAsync(id);
+            if (subject != null)
             {
-                _context.Faculties.Remove(faculty);
+                _context.Subjects.Remove(subject);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FacultyExists(int id)
+        private bool SubjectExists(int id)
         {
-          return (_context.Faculties?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Subjects?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

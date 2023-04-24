@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ISTPLab.Models.Timetable>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Розклад</h1>
+
+<p>
+    <a asp-action="Create">Додати новий</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                
+                @Html.DisplayNameFor(model => model.AuditoryNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupTtNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeacherNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuditoryNavigation.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupTtNavigation.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectNavigation.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeacherNavigation.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

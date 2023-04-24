@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ISTPLab.Models;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace ISTPLab.Controllers
 {
     public class StudentsController : Controller
     {
         private readonly TimeTableContext _context;
+    
 
         public StudentsController(TimeTableContext context)
         {
@@ -59,11 +61,13 @@ namespace ISTPLab.Controllers
         public async Task<IActionResult> Create([Bind("Id,Name,GroupSt")] Student student)
         {
             if (ModelState.IsValid)
-            {
+            { 
                 _context.Add(student);
+                //await _context.SaveChangesAsync();
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+                return RedirectToAction("Index");
+           }
+           // else {return  View(ViewBag("Erroe"));}
             ViewData["GroupSt"] = new SelectList(_context.Groups, "Id", "Id", student.GroupSt);
             return View(student);
         }
