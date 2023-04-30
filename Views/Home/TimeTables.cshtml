@@ -29,7 +29,9 @@
             <th scope="col">
                 @Html.DisplayNameFor(model => model.TeacherNavigation)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -48,6 +50,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TeacherNavigation.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
                 </td>
                 
             </tr>

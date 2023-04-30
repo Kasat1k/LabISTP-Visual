@@ -62,7 +62,7 @@ namespace ISTPLab.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Subject,Auditory,GroupTt,Teacher")] Timetable timetable)
+        public async Task<IActionResult> Create([Bind("Id,Subject,Auditory,GroupTt,Teacher,Time")] Timetable timetable)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace ISTPLab.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Subject,Auditory,GroupTt,Teacher")] Timetable timetable)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Subject,Auditory,GroupTt,Teacher,Time")] Timetable timetable)
         {
             if (id != timetable.Id)
             {

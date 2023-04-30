@@ -22,7 +22,9 @@ namespace ISTPLab.Controllers
         public async Task<IActionResult> Index()
         {
             //return _context.Faculties != null ? 
+         
             return View(await _context.Faculties.ToListAsync());
+
                         //  Problem("Entity set 'TimeTableContext.Faculties'  is null.");
         }
 

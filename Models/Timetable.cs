@@ -13,13 +13,17 @@ public partial class Timetable
     [Required(ErrorMessage = "Поле не повинно бути порожнім")]
     [Display(Name = "Номер аудиторії")]
     public int Auditory { get; set; }
-  
+    
     [Required(ErrorMessage = "Поле не повинно бути порожнім")]
     [Display(Name = "Група")]
     public int GroupTt { get; set; }
     [Required(ErrorMessage = "Поле не повинно бути порожнім")]
     [Display(Name = "Викладач")]
     public int Teacher { get; set; }
+    
+    [Required(ErrorMessage = "Поле не повинно бути порожнім")]
+    [Display(Name = "Час")]
+    public DateTime Time { get; set; }
     [Display(Name = "Номер аудиторії")]
     public virtual Auditory AuditoryNavigation { get; set; } = null!;
     [Display(Name = "Група")]

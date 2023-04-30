@@ -132,6 +132,7 @@ public partial class TimeTableContext : DbContext
             entity.Property(e => e.GroupTt).HasColumnName("GROUP_TT");
             entity.Property(e => e.Subject).HasColumnName("SUBJECT");
             entity.Property(e => e.Teacher).HasColumnName("TEACHER");
+            entity.Property(e => e.Time).HasColumnName("Time");
 
             entity.HasOne(d => d.AuditoryNavigation).WithMany(p => p.Timetables)
                 .HasForeignKey(d => d.Auditory)

@@ -73,6 +73,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.TeacherNavigation)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
             <th></th>
         </tr>
     </>
@@ -95,6 +98,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TeacherNavigation.Name)
             </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.Time)
+                </td>
                 
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Змінити інформацію про пару</a> |
