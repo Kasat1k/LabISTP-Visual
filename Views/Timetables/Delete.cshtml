@@ -4,18 +4,17 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Видалення пари </h1>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Timetable</h4>
+   
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.AuditoryNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AuditoryNavigation.Id)
+            @Html.DisplayFor(model => model.AuditoryNavigation.Number)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.GroupTtNavigation)
@@ -27,19 +26,20 @@
             @Html.DisplayNameFor(model => model.SubjectNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SubjectNavigation.Id)
+            @Html.DisplayFor(model => model.SubjectNavigation.Name)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.TeacherNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TeacherNavigation.Id)
+            @Html.DisplayFor(model => model.TeacherNavigation.Name)
         </dd>
     </dl>
+    <br/>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Видалити" class="btn btn-primary" style="margin-right: 20px;"  /> 
+        <a asp-action="Index" class="btn btn-primary" style="margin-right: 20px;">Повернутись</a>
     </form>
 </div>

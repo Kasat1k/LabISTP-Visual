@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\loader.css" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\loader.css.map" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\loader.min.css" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\loader.min.css.map" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\loader.rtl.css" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\loader.rtl.css.map" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\loader.rtl.min.css" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\loader.rtl.min.css.map" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="App.Metrics.Extensions.Configuration" Version="4.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.4" />

@@ -41,9 +41,9 @@ namespace ISTPLab.Controllers
                 return NotFound();
             }
 
-            // return View(faculty);
-            // return View(Faculty)
-            return RedirectToAction("Index", "Teachers", new { id = faculty.Id, name = faculty.Name });
+            return View(faculty);
+             
+            
         }
 
         // GET: Faculties/Create

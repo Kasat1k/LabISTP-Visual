@@ -4,15 +4,63 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Розклад</h1>
-
+<h1>Інформація про проведення пар у різних групах</h1>
+<hr />
+<br />
 <p>
-    <a asp-action="Create">Додати новий</a>
+    <button>
+        <a asp-action="Index" asp-controller="Auditories">
+            Аудиторії
+            <span></span>   
+        </a>
+    </button>
+    <button>
+        <a asp-action="Index" asp-controller="Faculties">
+            Факультети
+            <span></span>   
+        </a>
+    </button>
+    <button>
+        <a asp-action="Index" asp-controller="Groups">
+            Групи
+            <span></span>   
+        </a>
+    </button>
+    <button>
+        <a asp-action="Index" asp-controller="Students">
+            Студенти
+            <span></span>   
+        </a>
+    </button>
+    <button>
+        <a asp-action="Index" asp-controller="Subjects">
+            Предмети
+            <span></span>   
+        </a>
+    </button>
+    <button>
+        <a asp-action="Index" asp-controller="Teachers">
+            Викладачі
+            <span></span> 
+        </a>
+    </button>
+    <button>
+        <a asp-action="Index" asp-controller="Home">Повернутись на головну
+        <span></span> 
+        </a>
+    </button>
+    <br />
+    <br/>
+    <button>
+        <a asp-action="Create">Додати новий
+            <span></span>
+        </a>
+    </button>
 </p>
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
-            <th>
+            <th scope="col">
                 
                 @Html.DisplayNameFor(model => model.AuditoryNavigation)
             </th>
@@ -27,26 +75,31 @@
             </th>
             <th></th>
         </tr>
-    </thead>
+    </>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+     <tr class="table-dark">
+      
             <td>
                 @Html.DisplayFor(modelItem => item.AuditoryNavigation.Number)
             </td>
+               
             <td>
                 @Html.DisplayFor(modelItem => item.GroupTtNavigation.Name)
             </td>
+                
             <td>
                 @Html.DisplayFor(modelItem => item.SubjectNavigation.Name)
             </td>
+                
             <td>
                 @Html.DisplayFor(modelItem => item.TeacherNavigation.Name)
             </td>
+                
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Змінити інформацію про пару</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Інформація про пару</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Видалити пару</a>
             </td>
         </tr>
 }

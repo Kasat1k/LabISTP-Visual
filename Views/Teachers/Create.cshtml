@@ -4,9 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Додавання до факультету @ViewBag.FacultyName</h1>
+<h1>Додавання нового викладача </h1>
 
-<h4>Teacher</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,19 +18,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="Faculty" class="control-label"></label>
-                <input asp-for="Faculty" class="form-control" />
-                <span asp-validation-for="Faculty" class="text-danger"></span>
+                <select asp-for="Faculty" class="form-control" asp-items="ViewBag.Faculty"></select>
             </div>
-            <input type="hidden" value="@ViewBag.FacultyId" name="FacultyId" />
+           <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Додати" class="btn btn-primary" style="margin-right: 20px;" />
+                <br />
+                <br />
+                <a asp-action="Index" class="btn btn-primary" style="margin-right: 20px;">Повернутись</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

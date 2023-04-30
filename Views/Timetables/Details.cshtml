@@ -4,17 +4,17 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Інформація про проведення пари у групі @Model?.GroupTtNavigation.Name</h1>
 
 <div>
-    <h4>Timetable</h4>
+  
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.AuditoryNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AuditoryNavigation.Id)
+            @Html.DisplayFor(model => model.AuditoryNavigation.Number)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.GroupTtNavigation)
@@ -26,17 +26,18 @@
             @Html.DisplayNameFor(model => model.SubjectNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SubjectNavigation.Id)
+            @Html.DisplayFor(model => model.SubjectNavigation.Name)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.TeacherNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TeacherNavigation.Id)
+            @Html.DisplayFor(model => model.TeacherNavigation.Name)
         </dd>
     </dl>
 </div>
+<br/>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" class="btn btn-primary" style="margin-right: 20px;" asp-route-id="@Model?.Id">Змінити</a> 
+    <a asp-action="Index" class="btn btn-primary">Повернутись</a>
 </div>

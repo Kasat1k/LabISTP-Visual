@@ -50,10 +50,10 @@ namespace ISTPLab.Controllers
         // GET: Timetables/Create
         public IActionResult Create()
         {
-            ViewData["Auditory"] = new SelectList(_context.Auditories, "Id", "Id");
+            ViewData["Auditory"] = new SelectList(_context.Auditories, "Id", "Number");
             ViewData["GroupTt"] = new SelectList(_context.Groups, "Id", "Name");
-            ViewData["Subject"] = new SelectList(_context.Subjects, "Id", "Id");
-            ViewData["Teacher"] = new SelectList(_context.Teachers, "Id", "Id");
+            ViewData["Subject"] = new SelectList(_context.Subjects, "Id", "Name");
+            ViewData["Teacher"] = new SelectList(_context.Teachers, "Id", "Name");
             return View();
         }
 
@@ -71,10 +71,10 @@ namespace ISTPLab.Controllers
                 
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Auditory"] = new SelectList(_context.Auditories, "Id", "Id", timetable.Auditory);
+            ViewData["Auditory"] = new SelectList(_context.Auditories, "Id", "Number", timetable.Auditory);
             ViewData["GroupTt"] = new SelectList(_context.Groups, "Id", "Name", timetable.GroupTt);
-            ViewData["Subject"] = new SelectList(_context.Subjects, "Id", "Id", timetable.Subject);
-            ViewData["Teacher"] = new SelectList(_context.Teachers, "Id", "Id", timetable.Teacher);
+            ViewData["Subject"] = new SelectList(_context.Subjects, "Id", "Name", timetable.Subject);
+            ViewData["Teacher"] = new SelectList(_context.Teachers, "Id", "Name", timetable.Teacher);
             return View(timetable);
         }
 
@@ -91,10 +91,10 @@ namespace ISTPLab.Controllers
             {
                 return NotFound();
             }
-            ViewData["Auditory"] = new SelectList(_context.Auditories, "Id", "Id", timetable.Auditory);
+            ViewData["Auditory"] = new SelectList(_context.Auditories, "Id", "Number", timetable.Auditory);
             ViewData["GroupTt"] = new SelectList(_context.Groups, "Id", "Name", timetable.GroupTt);
-            ViewData["Subject"] = new SelectList(_context.Subjects, "Id", "Id", timetable.Subject);
-            ViewData["Teacher"] = new SelectList(_context.Teachers, "Id", "Id", timetable.Teacher);
+            ViewData["Subject"] = new SelectList(_context.Subjects, "Id", "Name", timetable.Subject);
+            ViewData["Teacher"] = new SelectList(_context.Teachers, "Id", "Name", timetable.Teacher);
             return View(timetable);
         }
 
@@ -130,10 +130,10 @@ namespace ISTPLab.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Auditory"] = new SelectList(_context.Auditories, "Id", "Id", timetable.Auditory);
+            ViewData["Auditory"] = new SelectList(_context.Auditories, "Id", "Number", timetable.Auditory);
             ViewData["GroupTt"] = new SelectList(_context.Groups, "Id", "Name", timetable.GroupTt);
-            ViewData["Subject"] = new SelectList(_context.Subjects, "Id", "Id", timetable.Subject);
-            ViewData["Teacher"] = new SelectList(_context.Teachers, "Id", "Id", timetable.Teacher);
+            ViewData["Subject"] = new SelectList(_context.Subjects, "Id", "Name", timetable.Subject);
+            ViewData["Teacher"] = new SelectList(_context.Teachers, "Id", "Name", timetable.Teacher);
             return View(timetable);
         }
 

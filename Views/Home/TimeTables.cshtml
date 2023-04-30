@@ -7,30 +7,36 @@
 
 <h1>Заплановані пари для обраної групи</h1>
 
+<button>
+    <a asp-action="Index">
+    <span></span> Повернутись на головну
+    </a>
+</button>
 
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
-            <th>
+            <th scope="col">
 
                 @Html.DisplayNameFor(model => model.AuditoryNavigation)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.GroupTtNavigation)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.SubjectNavigation)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.TeacherNavigation)
             </th>
-            <th></th>
+            
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="table-dark">
+               
                 <td>
                     @Html.DisplayFor(modelItem => item.AuditoryNavigation.Number)
                 </td>

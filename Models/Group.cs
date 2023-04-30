@@ -10,7 +10,7 @@ public partial class Group
     [Required(ErrorMessage = "Поле не повинно бути порожнім")]
     [Display(Name = "Група")]
     public string Name { get; set; } = null!;
-
+    [Display(Name = "Факультет")]
     public int Faculty { get; set; }
     [Display(Name = "Факультет")]
     public virtual Faculty FacultyNavigation { get; set; } = null!;

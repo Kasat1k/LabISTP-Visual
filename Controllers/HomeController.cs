@@ -36,24 +36,30 @@ namespace ISTPLab.Controllers
         }
         public async Task<IActionResult> TimeTables([Bind("GroupTt")] Timetable timetable)
         {
-            // id = 2;
-          
             var timetablessByGroup = _context.Timetables.Where(t => t.GroupTt == timetable.GroupTt).Include(t => t.GroupTtNavigation).Include(t=>t.SubjectNavigation).Include(t=>t.AuditoryNavigation).Include(t=>t.TeacherNavigation);
             return View(await timetablessByGroup.ToListAsync());
-            ViewData["GroupTt"] = new SelectList(_context.Groups, "Id", "Name");
-            // return View();
-            //return View(id);
-
-           
         }
 
         public async Task<IActionResult> GroupChoose() 
         {
-
-            // var groups = await _context.Groups.ToListAsync();
             ViewData["GroupCh"] = new SelectList(_context.Groups, "Id", "Name");
             return View();
         }
+        public async Task<IActionResult> Acception()
+        {
+            return View();
+        }
+        public async Task<IActionResult> ValidationPass(string Password)
+        {
+            if (Password == "Admin") return RedirectToAction("Admin", "Home");
+            else return RedirectToAction("Index", "Home");
+        }
+        public async Task<IActionResult> Admin()
+        {
+            ViewData["GroupCh"] = new SelectList(_context.Groups, "Id", "Name");
+            return View();
+        }
+      
 
 
     }

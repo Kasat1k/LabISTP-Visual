@@ -8,7 +8,7 @@ public partial class Faculty
 {
     public int Id { get; set; }
     [Required (ErrorMessage = "Поле не повинно бути порожнім")]
-   [Display (Name = "Факультет")]
+   [Display (Name = "Назва факультету")]
 
     public string Name { get; set; } = null!;
      //[Display(Name = "Інформація")]

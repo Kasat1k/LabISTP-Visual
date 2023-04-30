@@ -49,7 +49,7 @@ namespace ISTPLab.Controllers
         // GET: Students/Create
         public IActionResult Create()
         {
-            ViewData["GroupSt"] = new SelectList(_context.Groups, "Id", "Id");
+            ViewData["GroupSt"] = new SelectList(_context.Groups, "Id", "Name");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace ISTPLab.Controllers
                 return RedirectToAction("Index");
            }
            // else {return  View(ViewBag("Erroe"));}
-            ViewData["GroupSt"] = new SelectList(_context.Groups, "Id", "Id", student.GroupSt);
+            ViewData["GroupSt"] = new SelectList(_context.Groups, "Id", "Name", student.GroupSt);
             return View(student);
         }
 
@@ -85,7 +85,7 @@ namespace ISTPLab.Controllers
             {
                 return NotFound();
             }
-            ViewData["GroupSt"] = new SelectList(_context.Groups, "Id", "Id", student.GroupSt);
+            ViewData["GroupSt"] = new SelectList(_context.Groups, "Id", "Name", student.GroupSt);
             return View(student);
         }
 
@@ -121,7 +121,7 @@ namespace ISTPLab.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GroupSt"] = new SelectList(_context.Groups, "Id", "Id", student.GroupSt);
+            ViewData["GroupSt"] = new SelectList(_context.Groups, "Id", "Name", student.GroupSt);
             return View(student);
         }
 

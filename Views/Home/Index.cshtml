@@ -2,13 +2,14 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-<h1>Розклад</h1>
-<p>
-    <a asp-action="GroupChoose">Перейти до розкладів предметів</a>
+<br/>
+<h1 style="text-align:center" >Розклад</h1>
+<br/>
+<p style="text-align:center">
+    <a asp-action="GroupChoose" button type="button" class="btn btn-danger" >Перейти до розкладу предметів як відвідувач</a>
 </p>
-
-<div class="text-center">
-    
-    
-</div>
+<br/>
+<br/>
+<p style="text-align:center">
+    <a asp-action="Acception" button type="button" class="btn btn-danger">Перейти до розкладу предметів як адміністратор</a>
+</p>

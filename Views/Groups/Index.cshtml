@@ -1,18 +1,68 @@
 ﻿@model IEnumerable<ISTPLab.Models.Group>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Groups";
 }
-
-<h1>Index</h1>
-
+<h1>Групи</h1>
+<hr />
+<br />
 <p>
-    <a asp-action="Create">Create New</a>
+    <button>
+        <a asp-action="Index" asp-controller="Timetables">
+            Розклад пар
+            <span></span>
+        </a>
+    </button>
+    <button>
+        <a asp-action="Index" asp-controller="Auditories">
+            Аудиторії
+            <span></span>
+        </a>
+    </button>
+    <button>
+        <a asp-action="Index" asp-controller="Faculties">
+            Факультети
+            <span></span>
+        </a>
+    </button>
+    <button>
+        <a asp-action="Index" asp-controller="Students">
+            Студенти
+            <span></span>
+        </a>
+    </button>
+    <button>
+        <a asp-action="Index" asp-controller="Subjects">
+            Предмети
+            <span></span>
+        </a>
+    </button>
+    <button>
+        <a asp-action="Index" asp-controller="Teachers">
+            Викладачі
+            <span></span>
+        </a>
+    </button>
+    <button>
+        <a asp-action="Index" asp-controller="Home">
+            Повернутись на головну
+            <span></span>
+        </a>
+    </button>
+    <br />
+    <br />
+    <button>
+        <a asp-action="Create">
+            Додати новий
+            <span></span>
+        </a>
+    </button>
+
 </p>
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
@@ -23,18 +73,18 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="table-dark">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FacultyNavigation.Name)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Змінити інформацію про групу @item?.Name</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Інформація про групу @item?.Name</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Видалити групу @item?.Name</a>
+                </td>
         </tr>
 }
     </tbody>
