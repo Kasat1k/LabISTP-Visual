@@ -44,17 +44,17 @@
             <span></span>
         </a>
     </button>
-    <button>
+    <buttonBack>
         <a asp-action="Index" asp-controller="Home">
             Повернутись на головну
             <span></span>
         </a>
-    </button>
+    </buttonBack>
     <br />
     <br />
     <button>
         <a asp-action="Create">
-            Додати новий
+            Створити нову аудиторію
             <span></span>
         </a>
     </button>
@@ -88,9 +88,9 @@
                 @Html.DisplayFor(modelItem => item.FacultyNavigation.Name)
             </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Змінити інформацію про аудиторію @item?.Number</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Інформація про аудитрію @item?.Number</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Видалити аудиторію @item?.Number</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Редагувати </a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Детальна інформація</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Видалити </a>
                 </td>
         </tr>
 }

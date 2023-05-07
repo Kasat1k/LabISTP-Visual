@@ -19,6 +19,7 @@ namespace ISTPLab.Controllers
         }
 
         // GET: Faculties
+       
         public async Task<IActionResult> Index()
         {
             //return _context.Faculties != null ? 
@@ -38,11 +39,12 @@ namespace ISTPLab.Controllers
 
             var faculty = await _context.Faculties
                 .FirstOrDefaultAsync(m => m.Id == id);
+            
             if (faculty == null)
             {
                 return NotFound();
             }
-
+            var groupsByFaculty = await _context.Groups.FirstOrDefaultAsync(g => g.Faculty == id);
             return View(faculty);
              
             
@@ -136,6 +138,10 @@ namespace ISTPLab.Controllers
                 return NotFound();
             }
 
+            if(faculty.Teachers != null || faculty.Groups != null || faculty.Auditories !=null)
+            {
+                return RedirectToAction("ErrorM", "Home");
+            }
             return View(faculty);
             
         }
@@ -163,5 +169,7 @@ namespace ISTPLab.Controllers
         {
           return (_context.Faculties?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+      
     }
+
 }

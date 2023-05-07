@@ -182,5 +182,25 @@ namespace ISTPLab.Controllers
         {
           return (_context.Timetables?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+        public async Task<IActionResult> DetailsUser(int? id)
+        {
+            if (id == null || _context.Timetables == null)
+            {
+                return NotFound();
+            }
+
+            var timetable = await _context.Timetables
+                .Include(t => t.AuditoryNavigation)
+                .Include(t => t.GroupTtNavigation)
+                .Include(t => t.SubjectNavigation)
+                .Include(t => t.TeacherNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (timetable == null)
+            {
+                return NotFound();
+            }
+
+            return View(timetable);
+        }
     }
 }

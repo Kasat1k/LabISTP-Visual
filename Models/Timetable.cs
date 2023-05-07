@@ -22,7 +22,8 @@ public partial class Timetable
     public int Teacher { get; set; }
     
     [Required(ErrorMessage = "Поле не повинно бути порожнім")]
-    [Display(Name = "Час")]
+    [Display(Name = "Час проведення пари")]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
     public DateTime Time { get; set; }
     [Display(Name = "Номер аудиторії")]
     public virtual Auditory AuditoryNavigation { get; set; } = null!;

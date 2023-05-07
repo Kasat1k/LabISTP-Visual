@@ -44,15 +44,16 @@
             <span></span> 
         </a>
     </button>
-    <button>
-        <a asp-action="Index" asp-controller="Home">Повернутись на головну
-        <span></span> 
+
+    <buttonBack>
+    <a asp-action="Index" asp-controller="Home" >
+           Повернутись на головну 
         </a>
-    </button>
+    </buttonBack>
     <br />
     <br/>
     <button>
-        <a asp-action="Create">Додати новий
+        <a asp-action="Create">Додати нову пару до розкладу
             <span></span>
         </a>
     </button>
@@ -103,9 +104,9 @@
                 </td>
                 
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Змінити інформацію про пару</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Інформація про пару</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Видалити пару</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Редагувати</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Детальна інформація</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Видалити </a>
             </td>
         </tr>
 }

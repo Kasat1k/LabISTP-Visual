@@ -1,10 +1,10 @@
-﻿@model ISTPLab.Models.Teacher
+﻿@model ISTPLab.Models.Group
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Інформація про викладача @Model?.Name</h1>
+<h1>Інформація про групу @Model?.Name</h1>
 
 <div>
 
@@ -24,8 +24,5 @@
         </dd>
     </dl>
 </div>
-<br />
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary" style="margin-right: 20px;">Редагувати </a> 
-    <a asp-action="Index" class="btn btn-primary" style="margin-right: 20px;">Викладачі</a>
-</div>
+<br/>
+

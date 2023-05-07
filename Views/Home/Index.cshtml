@@ -13,3 +13,30 @@
 <p style="text-align:center">
     <a asp-action="Acception" button type="button" class="btn btn-danger">Перейти до розкладу предметів як адміністратор</a>
 </p>
+<div class="container">
+    <div id="chart1"></div>
+</div>
+@section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+
+            $.get('/api/Chart/JsonData', function (JsonData) {
+
+                 data = google.visualization.arrayToDataTable(JsonData, false);
+                var option = {
+                    title: "Співвідношення кількості викладачів та факультетів",
+                    width: 500,
+                    height: 400
+                };
+                chart = new google.visualization.PieChart(document.getElementById('chart1'));
+                chart.draw(data, option);
+
+            })
+        }
+    </script>
+}

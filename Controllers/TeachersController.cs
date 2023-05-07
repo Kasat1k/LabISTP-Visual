@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ISTPLab.Models;
+using NuGet.Protocol.Plugins;
 
 namespace ISTPLab.Controllers
 {
@@ -143,6 +144,10 @@ namespace ISTPLab.Controllers
             {
                 return NotFound();
             }
+            if (teacher.Timetables != null )
+            {
+                return RedirectToAction("ErrorM", "Home");
+            }
 
             return View(teacher);
         }
@@ -169,6 +174,23 @@ namespace ISTPLab.Controllers
         private bool TeacherExists(int id)
         {
           return (_context.Teachers?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        public async Task<IActionResult> DetailsUser(int? id)
+        {
+            if (id == null || _context.Teachers == null)
+            {
+                return NotFound();
+            }
+
+            var teacher = await _context.Teachers
+                .Include(t => t.FacultyNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (teacher == null)
+            {
+                return NotFound();
+            }
+
+            return View(teacher);
         }
     }
 }

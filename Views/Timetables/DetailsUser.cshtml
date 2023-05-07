@@ -17,7 +17,7 @@
             @Html.DisplayFor(model => model.AuditoryNavigation.Number)
         </dd>
         <dd>
-            <a asp-action="Details" asp-controller="Auditories" asp-route-id="@Model?.Auditory">Детальна інформація</a>
+            <a asp-action="DetailsUser" asp-controller="Auditories" asp-route-id="@Model?.Auditory">Детальна інформація</a>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.GroupTtNavigation)
@@ -26,7 +26,7 @@
             @Html.DisplayFor(model => model.GroupTtNavigation.Name)
         </dd>
         <dd>
-            <a asp-action="Details" asp-controller="Groups" asp-route-id="@Model?.GroupTt">Детальна інформація</a>
+            <a asp-action="DetailsUser" asp-controller="Groups" asp-route-id="@Model?.GroupTt">Детальна інформація</a>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.SubjectNavigation)
@@ -35,7 +35,7 @@
             @Html.DisplayFor(model => model.SubjectNavigation.Name)
         </dd>
         <dd>
-            <a asp-action="Details" asp-controller="Subjects" asp-route-id="@Model?.Subject">Детальна інформація</a>
+            <a asp-action="DetailsUser" asp-controller="Subjects" asp-route-id="@Model?.Subject">Детальна інформація</a>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.TeacherNavigation)
@@ -44,7 +44,7 @@
             @Html.DisplayFor(model => model.TeacherNavigation.Name)
         </dd>
         <dd>
-            <a asp-action="Details" asp-controller="Teachers" asp-route-id="@Model?.Teacher">Детальна інформація</a>
+            <a asp-action="DetailsUser" asp-controller="Teachers" asp-route-id="@Model?.Teacher">Детальна інформація</a>
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Time)
@@ -56,7 +56,4 @@
     </dl>
 </div>
 <br/>
-<div>
-    <a asp-action="Edit" class="btn btn-primary" style="margin-right: 20px;" asp-route-id="@Model?.Id">Редагувати</a> 
-    <a asp-action="Index" class="btn btn-primary">Повернутись</a>
-</div>
+

@@ -4,10 +4,9 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Видалення факультет @Model?.Name</h1>
+<h1>Видалення факультету @Model?.Name</h1>
 
 <div>
-
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -17,7 +16,6 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
-    
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Видалити" class="btn btn-primary" style="margin-right: 20px;" /> 

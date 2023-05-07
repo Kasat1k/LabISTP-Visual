@@ -21,10 +21,11 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.GroupStNavigation.Name)
         </dd>
+
     </dl>
 </div>
 <br />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary" style="margin-right: 20px;">Змінити інформацію про студента @Model?.Name</a> 
-    <a asp-action="Index" class="btn btn-primary" style="margin-right: 20px;">Повернутись</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary" style="margin-right: 20px;">Редагувати</a> 
+    <a asp-action="Index" class="btn btn-primary" style="margin-right: 20px;">Студенти</a>
 </div>

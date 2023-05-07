@@ -49,18 +49,20 @@ namespace ISTPLab.Controllers
         {
             return View();
         }
+
         public async Task<IActionResult> ValidationPass(string Password)
         {
             if (Password == "Admin") return RedirectToAction("Admin", "Home");
-            else return RedirectToAction("Index", "Home");
+            else return RedirectToAction("WrongPass", "Home");
         }
         public async Task<IActionResult> Admin()
         {
             ViewData["GroupCh"] = new SelectList(_context.Groups, "Id", "Name");
             return View();
         }
-      
 
-
+        public async Task<IActionResult> WrongPass() { return View(); }
+        public async Task<IActionResult> ErrorM() { return View(); }
+        public async Task<IActionResult> DetailsUser() { return View(); }
     }
 }

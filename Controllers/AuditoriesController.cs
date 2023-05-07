@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ISTPLab.Models;
+using NuGet.Protocol.Plugins;
 
 namespace ISTPLab.Controllers
 {
@@ -136,7 +137,10 @@ namespace ISTPLab.Controllers
             {
                 return NotFound();
             }
-
+            if (auditory.Timetables != null)
+            {
+                return RedirectToAction("ErrorM", "Home");
+            }
             return View(auditory);
         }
 
@@ -162,6 +166,23 @@ namespace ISTPLab.Controllers
         private bool AuditoryExists(int id)
         {
           return (_context.Auditories?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        public async Task<IActionResult> DetailsUser(int? id)
+        {
+            if (id == null || _context.Auditories == null)
+            {
+                return NotFound();
+            }
+
+            var auditory = await _context.Auditories
+                .Include(a => a.FacultyNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (auditory == null)
+            {
+                return NotFound();
+            }
+
+            return View(auditory);
         }
     }
 }

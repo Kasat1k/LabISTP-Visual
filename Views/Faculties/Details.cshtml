@@ -19,6 +19,8 @@
 </div>
 <br/>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary" style="margin-right: 20px;">Змінити інформацію про факультет @Model?.Name</a> 
-    <a asp-action="Index" class="btn btn-primary" style="margin-right: 20px;">Повернутись</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary" style="margin-right: 20px;">Редагувати </a>
+    <a asp-action="Index" class="btn btn-primary" style="margin-right: 20px;">Факультети</a>
+    <a asp-action="IndexFaculty" asp-controller="Groups" asp-route-id="@Model.Id" class="btn btn-primary" style="margin-right: 20px;">Групи факультету</a>
+
 </div>

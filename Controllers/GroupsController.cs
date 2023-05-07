@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ISTPLab.Models;
+using NuGet.Protocol.Plugins;
 
 namespace ISTPLab.Controllers
 {
@@ -23,6 +24,18 @@ namespace ISTPLab.Controllers
         {
             var timeTableContext = _context.Groups.Include(@g => @g.FacultyNavigation);
             return View(await timeTableContext.ToListAsync());
+        }
+        public async Task<IActionResult> IndexFaculty(int? Id)
+        {
+            if (Id == null || _context.Groups == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var timeTableContext = _context.Groups.Where(@g => @g.Faculty == Id).Include(@g => @g.FacultyNavigation);
+                return View(await timeTableContext.ToListAsync());
+            }
         }
 
         // GET: Groups/Details/5
@@ -136,7 +149,10 @@ namespace ISTPLab.Controllers
             {
                 return NotFound();
             }
-
+            if (@group.Students != null || @group.Timetables != null )
+            {
+                return RedirectToAction("ErrorM", "Home");
+            }
             return View(@group);
         }
 
@@ -162,6 +178,23 @@ namespace ISTPLab.Controllers
         private bool GroupExists(int id)
         {
           return (_context.Groups?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        public async Task<IActionResult> DetailsUser(int? id)
+        {
+            if (id == null || _context.Groups == null)
+            {
+                return NotFound();
+            }
+
+            var @group = await _context.Groups
+                .Include(@g => @g.FacultyNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (@group == null)
+            {
+                return NotFound();
+            }
+
+            return View(@group);
         }
     }
 }

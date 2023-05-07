@@ -1,9 +1,9 @@
-﻿@model IEnumerable<ISTPLab.Models.Student>
+﻿@model IEnumerable<ISTPLab.Models.Group>
 
 @{
-    ViewData["Title"] = "Students";
+    ViewData["Title"] = "Groups";
 }
-<h1>Студенти</h1>
+<h1>Групи</h1>
 <hr />
 <br />
 <p>
@@ -26,8 +26,8 @@
         </a>
     </button>
     <button>
-        <a asp-action="Index" asp-controller="Groups">
-            Групи
+        <a asp-action="Index" asp-controller="Students">
+            Студенти
             <span></span>
         </a>
     </button>
@@ -43,17 +43,17 @@
             <span></span>
         </a>
     </button>
-    <buttonBack>
+    <button>
         <a asp-action="Index" asp-controller="Home">
             Повернутись на головну
             <span></span>
         </a>
-    </buttonBack>
+    </button>
     <br />
     <br />
     <button>
         <a asp-action="Create">
-            Додати нового студента
+            Створити нову групу
             <span></span>
         </a>
     </button>
@@ -66,7 +66,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GroupStNavigation)
+                @Html.DisplayNameFor(model => model.FacultyNavigation)
             </th>
             <th></th>
         </tr>
@@ -78,12 +78,12 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GroupStNavigation.Name)
+                @Html.DisplayFor(modelItem => item.FacultyNavigation.Name)
             </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Регування</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Детальна інформація</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Видалити </a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Редагувати</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Детальна інформація </a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Видалити</a>
                 </td>
         </tr>
 }

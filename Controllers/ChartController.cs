@@ -21,9 +21,9 @@ namespace ISTPLab.Controllers
             var faculties = _context.Faculties.ToList();
             List<object> catTeacher = new List<object>();
             catTeacher.Add(new[] { "Факультет", "Кількість викладчів" });
-            foreach (var cat in faculties)
+            foreach (var c in faculties)
             {
-                catTeacher.Add(new object[] { cat.Name, cat.Teachers.Count() });
+                catTeacher.Add(new object[] { c.Name, c.Teachers.Count() });
             }
             return new JsonResult(catTeacher);
         }

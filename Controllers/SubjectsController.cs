@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ISTPLab;
 using ISTPLab.Models;
+using NuGet.Protocol.Plugins;
 
 namespace ISTPLab.Controllers
 {
@@ -132,6 +133,10 @@ namespace ISTPLab.Controllers
             {
                 return NotFound();
             }
+            if (subject.Timetables != null )
+            {
+                return RedirectToAction("ErrorM", "Home");
+            }
 
             return View(subject);
         }
@@ -158,6 +163,22 @@ namespace ISTPLab.Controllers
         private bool SubjectExists(int id)
         {
           return (_context.Subjects?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        public async Task<IActionResult> DetailsUser(int? id)
+        {
+            if (id == null || _context.Subjects == null)
+            {
+                return NotFound();
+            }
+
+            var subject = await _context.Subjects
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (subject == null)
+            {
+                return NotFound();
+            }
+
+            return View(subject);
         }
     }
 }

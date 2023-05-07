@@ -54,7 +54,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Time)
                 </td>
-                
+
+                <td>
+                   
+                    <a asp-action="DetailsUser" asp-controller="Timetables"  asp-route-id="@item.Id">Детальна інформація</a> 
+                    
+                </td>
             </tr>
         }
     </tbody>
